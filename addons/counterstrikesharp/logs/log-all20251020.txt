@@ -1,0 +1,215 @@
+2025-10-20 18:43:47.581 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 18:43:47.678 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 18:43:47.685 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 18:43:47.687 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 18:43:47.688 +08:00 [WARN] (cssharp:AdminManager) Admin data file not found. Skipping admin data load.
+2025-10-20 18:43:47.689 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 18:43:47.690 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 18:57:12.369 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 18:57:12.458 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 18:57:12.465 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 18:57:12.467 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 18:57:12.476 +08:00 [EROR] (cssharp:AdminManager) Failed to load admin data
+System.Text.Json.JsonException: The JSON value could not be converted to CounterStrikeSharp.API.Modules.Admin.AdminData. Path: $.Admins | LineNumber: 1 | BytePositionInLine: 13.
+   at System.Text.Json.ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Type propertyType)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonDictionaryConverter`3.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TDictionary& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at CounterStrikeSharp.API.Modules.Admin.AdminManager.LoadAdminData(String adminDataPath) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Modules/Admin/AdminPermissions.cs:line 129
+2025-10-20 18:57:12.498 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 18:57:12.500 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 19:01:35.511 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 19:01:35.607 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 19:01:35.614 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 19:01:35.616 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 19:01:35.625 +08:00 [EROR] (cssharp:AdminManager) Failed to load admin data
+System.Text.Json.JsonException: The JSON value could not be converted to CounterStrikeSharp.API.Modules.Admin.AdminData. Path: $.Admins | LineNumber: 1 | BytePositionInLine: 13.
+   at System.Text.Json.ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Type propertyType)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonDictionaryConverter`3.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TDictionary& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at CounterStrikeSharp.API.Modules.Admin.AdminManager.LoadAdminData(String adminDataPath) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Modules/Admin/AdminPermissions.cs:line 129
+2025-10-20 19:01:35.645 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 19:01:35.646 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 19:03:28.503 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 19:03:28.572 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 19:03:28.578 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 19:03:28.580 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 19:03:28.587 +08:00 [EROR] (cssharp:AdminManager) Failed to load admin data
+System.Text.Json.JsonException: The JSON value could not be converted to CounterStrikeSharp.API.Modules.Admin.AdminData. Path: $.Admins | LineNumber: 1 | BytePositionInLine: 13.
+   at System.Text.Json.ThrowHelper.ThrowJsonException_DeserializeUnableToConvertValue(Type propertyType)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonDictionaryConverter`3.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, TDictionary& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at CounterStrikeSharp.API.Modules.Admin.AdminManager.LoadAdminData(String adminDataPath) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Modules/Admin/AdminPermissions.cs:line 129
+2025-10-20 19:03:28.597 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 19:03:28.599 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 19:06:55.957 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 19:06:56.028 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 19:06:56.034 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 19:06:56.035 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 19:06:56.045 +08:00 [INFO] (cssharp:AdminManager) Loaded admin data with 2 admins.
+2025-10-20 19:06:56.045 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 19:06:56.058 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 19:13:08.648 +08:00 [EROR] (cssharp:Core) Could not load plugin "D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/TestPlugin/TestPlugin.dll"
+System.InvalidOperationException: Dependency resolution failed for component D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/TestPlugin/TestPlugin.dll with error code -2147450734. Detailed error: Failed to locate managed application [D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/TestPlugin/TestPlugin.dll]
+
+   at System.Runtime.Loader.AssemblyDependencyResolver..ctor(String componentAssemblyPath)
+   at McMaster.NETCore.Plugins.Loader.ManagedLoadContext..ctor(String mainAssemblyPath, IReadOnlyDictionary`2 managedAssemblies, IReadOnlyDictionary`2 nativeLibraries, IReadOnlyCollection`1 privateAssemblies, IReadOnlyCollection`1 defaultAssemblies, IReadOnlyCollection`1 additionalProbingPaths, IReadOnlyCollection`1 resourceProbingPaths, AssemblyLoadContext defaultLoadContext, Boolean preferDefaultLoadContext, Boolean lazyLoadReferences, Boolean isCollectible, Boolean loadInMemory, Boolean shadowCopyNativeLibraries)
+   at McMaster.NETCore.Plugins.Loader.AssemblyLoadContextBuilder.Build()
+   at McMaster.NETCore.Plugins.PluginLoader..ctor(PluginConfig config)
+   at McMaster.NETCore.Plugins.PluginLoader.CreateFromAssemblyFile(String assemblyFile, Action`1 configure)
+   at McMaster.NETCore.Plugins.PluginLoader.CreateFromAssemblyFile(String assemblyFile, Type[] sharedTypes, Action`1 configure)
+   at CounterStrikeSharp.API.Core.Plugin.PluginContext..ctor(IServiceProvider applicationServiceProvider, ICommandManager commandManager, IScriptHostConfiguration hostConfiguration, String path, Int32 id) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Plugin/PluginContext.cs:line 78
+   at CounterStrikeSharp.API.Core.Plugin.Host.PluginManager.LoadPlugin(String path) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Plugin/Host/PluginManager.cs:line 190
+   at CounterStrikeSharp.API.Core.Application.OnCSSPluginCommand(CCSPlayerController caller, CommandInfo info) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Application.cs:line 198
+2025-10-20 19:15:08.721 +08:00 [EROR] (cssharp:Core) Could not load plugin "D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/TestPlugin/TestPlugin.dll"
+System.InvalidOperationException: Dependency resolution failed for component D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/TestPlugin/TestPlugin.dll with error code -2147450734. Detailed error: Failed to locate managed application [D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/TestPlugin/TestPlugin.dll]
+
+   at System.Runtime.Loader.AssemblyDependencyResolver..ctor(String componentAssemblyPath)
+   at McMaster.NETCore.Plugins.Loader.ManagedLoadContext..ctor(String mainAssemblyPath, IReadOnlyDictionary`2 managedAssemblies, IReadOnlyDictionary`2 nativeLibraries, IReadOnlyCollection`1 privateAssemblies, IReadOnlyCollection`1 defaultAssemblies, IReadOnlyCollection`1 additionalProbingPaths, IReadOnlyCollection`1 resourceProbingPaths, AssemblyLoadContext defaultLoadContext, Boolean preferDefaultLoadContext, Boolean lazyLoadReferences, Boolean isCollectible, Boolean loadInMemory, Boolean shadowCopyNativeLibraries)
+   at McMaster.NETCore.Plugins.Loader.AssemblyLoadContextBuilder.Build()
+   at McMaster.NETCore.Plugins.PluginLoader..ctor(PluginConfig config)
+   at McMaster.NETCore.Plugins.PluginLoader.CreateFromAssemblyFile(String assemblyFile, Action`1 configure)
+   at McMaster.NETCore.Plugins.PluginLoader.CreateFromAssemblyFile(String assemblyFile, Type[] sharedTypes, Action`1 configure)
+   at CounterStrikeSharp.API.Core.Plugin.PluginContext..ctor(IServiceProvider applicationServiceProvider, ICommandManager commandManager, IScriptHostConfiguration hostConfiguration, String path, Int32 id) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Plugin/PluginContext.cs:line 78
+   at CounterStrikeSharp.API.Core.Plugin.Host.PluginManager.LoadPlugin(String path) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Plugin/Host/PluginManager.cs:line 190
+   at CounterStrikeSharp.API.Core.Application.OnCSSPluginCommand(CCSPlayerController caller, CommandInfo info) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Application.cs:line 198
+2025-10-20 19:17:04.411 +08:00 [INFO] (cssharp:PluginContext) Loading plugin TestPlugin
+2025-10-20 19:17:04.590 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin 测试插件
+2025-10-20 20:02:34.499 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:02:34.509 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:04:06.310 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 20:04:06.390 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 20:04:06.396 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 20:04:06.398 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 20:04:06.408 +08:00 [INFO] (cssharp:AdminManager) Loaded admin data with 2 admins.
+2025-10-20 20:04:06.408 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 20:04:06.426 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 20:04:06.646 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:04:06.657 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:04:06.663 +08:00 [INFO] (cssharp:PluginContext) Loading plugin TestPlugin
+2025-10-20 20:05:42.354 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 20:05:42.433 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 20:05:42.439 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 20:05:42.441 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 20:05:42.450 +08:00 [INFO] (cssharp:AdminManager) Loaded admin data with 2 admins.
+2025-10-20 20:05:42.450 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 20:05:42.464 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 20:05:42.681 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:05:42.692 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:05:42.699 +08:00 [INFO] (cssharp:PluginContext) Loading plugin TestPlugin
+2025-10-20 20:06:08.679 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 20:06:08.753 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 20:06:08.759 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 20:06:08.761 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 20:06:08.770 +08:00 [INFO] (cssharp:AdminManager) Loaded admin data with 2 admins.
+2025-10-20 20:06:08.770 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 20:06:08.784 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 20:06:08.999 +08:00 [INFO] (cssharp:PluginContext) Loading plugin TestPlugin
+2025-10-20 20:07:03.049 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 20:07:03.122 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 20:07:03.129 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 20:07:03.131 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 20:07:03.140 +08:00 [INFO] (cssharp:AdminManager) Loaded admin data with 2 admins.
+2025-10-20 20:07:03.140 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 20:07:03.154 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 20:07:03.375 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:07:03.386 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:12:05.016 +08:00 [INFO] (cssharp:Core) CounterStrikeSharp is starting up...
+2025-10-20 20:12:05.087 +08:00 [INFO] (cssharp:CoreConfig) Successfully loaded core configuration
+2025-10-20 20:12:05.094 +08:00 [INFO] (cssharp:GameDataProvider) Successfully loaded 44 game data entries from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\gamedata\gamedata.json
+2025-10-20 20:12:05.096 +08:00 [INFO] (cssharp:Core) Loading Admins from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admins.json
+2025-10-20 20:12:05.105 +08:00 [INFO] (cssharp:AdminManager) Loaded admin data with 2 admins.
+2025-10-20 20:12:05.106 +08:00 [INFO] (cssharp:Core) Loading Admin Groups from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_groups.json
+2025-10-20 20:12:05.120 +08:00 [INFO] (cssharp:Core) Loading Admin Command Overrides from D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\configs\admin_overrides.json
+2025-10-20 20:12:05.347 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:12:05.361 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:20:42.797 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:20:42.804 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:20:42.809 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:20:42.860 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:20:42.872 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:21:25.973 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:21:25.975 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:31:26.342 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:31:26.342 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:31:26.343 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:31:26.347 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:31:26.352 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:31:26.353 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:31:26.353 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:31:26.353 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:31:26.357 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:31:26.361 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:31:50.091 +08:00 [EROR] (cssharp:Core) Could not load plugin "D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/BotMimicCS/BotMimicCS.dll"
+System.InvalidOperationException: Dependency resolution failed for component D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/BotMimicCS/BotMimicCS.dll with error code -2147450734. Detailed error: Failed to locate managed application [D:\SteamLibrary\steamapps\common\Counter-Strike Global Offensive\game\csgo\addons\counterstrikesharp\plugins/BotMimicCS/BotMimicCS.dll]
+
+   at System.Runtime.Loader.AssemblyDependencyResolver..ctor(String componentAssemblyPath)
+   at McMaster.NETCore.Plugins.Loader.ManagedLoadContext..ctor(String mainAssemblyPath, IReadOnlyDictionary`2 managedAssemblies, IReadOnlyDictionary`2 nativeLibraries, IReadOnlyCollection`1 privateAssemblies, IReadOnlyCollection`1 defaultAssemblies, IReadOnlyCollection`1 additionalProbingPaths, IReadOnlyCollection`1 resourceProbingPaths, AssemblyLoadContext defaultLoadContext, Boolean preferDefaultLoadContext, Boolean lazyLoadReferences, Boolean isCollectible, Boolean loadInMemory, Boolean shadowCopyNativeLibraries)
+   at McMaster.NETCore.Plugins.Loader.AssemblyLoadContextBuilder.Build()
+   at McMaster.NETCore.Plugins.PluginLoader..ctor(PluginConfig config)
+   at McMaster.NETCore.Plugins.PluginLoader.CreateFromAssemblyFile(String assemblyFile, Action`1 configure)
+   at McMaster.NETCore.Plugins.PluginLoader.CreateFromAssemblyFile(String assemblyFile, Type[] sharedTypes, Action`1 configure)
+   at CounterStrikeSharp.API.Core.Plugin.PluginContext..ctor(IServiceProvider applicationServiceProvider, ICommandManager commandManager, IScriptHostConfiguration hostConfiguration, String path, Int32 id) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Plugin/PluginContext.cs:line 78
+   at CounterStrikeSharp.API.Core.Plugin.Host.PluginManager.LoadPlugin(String path) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Plugin/Host/PluginManager.cs:line 190
+   at CounterStrikeSharp.API.Core.Application.OnCSSPluginCommand(CCSPlayerController caller, CommandInfo info) in /home/runner/work/CounterStrikeSharp/CounterStrikeSharp/managed/CounterStrikeSharp.API/Core/Application.cs:line 198
+2025-10-20 20:32:29.750 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:32:29.751 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:32:33.463 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:32:33.464 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:38:01.970 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:38:01.970 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:38:01.971 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:38:01.981 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:38:01.988 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:38:01.988 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:38:01.988 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:38:01.988 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:38:01.992 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:38:01.998 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:40:36.964 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:40:36.965 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:40:36.965 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:40:36.974 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:40:36.979 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:40:36.980 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:40:36.980 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:40:36.980 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:40:36.983 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:40:36.988 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:45:37.781 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:45:37.781 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:45:37.781 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:45:37.790 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:45:37.795 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:45:37.796 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:45:37.796 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:45:37.796 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:45:37.799 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:45:37.804 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:49:23.687 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:49:23.688 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:49:23.688 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:49:23.691 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:49:23.697 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS
+2025-10-20 20:49:23.697 +08:00 [INFO] (cssharp:PluginContext) Reloading plugin Bot Mimic CSS
+2025-10-20 20:49:23.697 +08:00 [INFO] (cssharp:PluginContext) Unloading plugin Bot Mimic CSS
+2025-10-20 20:49:23.697 +08:00 [INFO] (cssharp:PluginContext) Finished unloading plugin Bot Mimic CSS
+2025-10-20 20:49:23.700 +08:00 [INFO] (cssharp:PluginContext) Loading plugin BotMimicCSS
+2025-10-20 20:49:23.706 +08:00 [INFO] (cssharp:PluginContext) Finished loading plugin Bot Mimic CSS

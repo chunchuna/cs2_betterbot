@@ -1,0 +1,34 @@
+{
+  "阿春子": {
+    "identity": "76561198964375678",
+    "flags": ["@css/root"]
+  },
+  "阿春子2": {
+    "identity": "STEAM_0:0:502054975",
+    "flags": ["@css/root"]
+  },
+  "阿春子3": {
+    "identity": "[U:1:1004109950]",
+    "flags": ["@css/root"]
+  },
+  "控制台": {
+    "identity": "STEAM_0:0:0",
+    "flags": ["@css/root"]
+  },
+  "本地": {
+    "identity": "STEAM_ID_LAN",
+    "flags": ["@css/root"]
+  },
+  "本地待验证": {
+    "identity": "STEAM_ID_PENDING",
+    "flags": ["@css/root"]
+  },
+  "本地IP": {
+    "identity": "127.0.0.1",
+    "flags": ["@css/root"]
+  },
+  "本机": {
+    "identity": "localhost",
+    "flags": ["@css/root"]
+  }
+} 

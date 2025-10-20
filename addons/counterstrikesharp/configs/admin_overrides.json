@@ -1,0 +1,10 @@
+{
+  "Commands": {
+    "css_plugins": {
+      "flags": ["@css/generic", "@css/root"]
+    },
+    "css_plugins_reload": {
+      "flags": ["@css/generic", "@css/root"]
+    }
+  }
+} 

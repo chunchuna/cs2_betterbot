@@ -1,0 +1,20 @@
+{
+  "Groups": {
+    "css/root": {
+      "flags": [
+        "css/generic",
+        "css/rcon", 
+        "css/chat",
+        "css/vote",
+        "css/admin",
+        "css/ban",
+        "css/slay",
+        "css/cheat",
+        "css/kick",
+        "css/cvar",
+        "css/plugins",
+        "css/cfg"
+      ]
+    }
+  }
+} 
