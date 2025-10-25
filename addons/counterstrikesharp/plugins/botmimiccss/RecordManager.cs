@@ -340,7 +340,8 @@ public class RecordManager
             Buttons = buttons,
             Impulse = 0,
             PredictedVelocity = velocity,
-            PredictedAngles = angles,
+            // Deep copy angles to avoid shared reference across frames
+            PredictedAngles = new QAngle(angles.X, angles.Y, angles.Z),
             PlayerSubtype = 0,
             PlayerSeed = 0
         };
