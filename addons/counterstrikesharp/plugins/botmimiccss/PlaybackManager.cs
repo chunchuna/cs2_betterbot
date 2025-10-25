@@ -235,12 +235,13 @@ public class PlaybackManager
         // Handle weapon switching
         if (!string.IsNullOrEmpty(frame.NewWeapon))
         {
+            var targetWeapon = NormalizeWeaponName(frame.NewWeapon);
             // Check if bot has the weapon, if not, give it to them
-            if (!HasWeapon(pawn, frame.NewWeapon))
+            if (!HasWeapon(pawn, targetWeapon))
             {
-                GiveWeapon(pawn, frame.NewWeapon);
+                GiveWeapon(pawn, targetWeapon);
             }
-            SwitchToWeapon(pawn, frame.NewWeapon);
+            SwitchToWeapon(pawn, targetWeapon);
         }
 
         // Check for bookmarks
@@ -458,7 +459,9 @@ public class PlaybackManager
             var weapon = weaponHandle?.Value;
             if (weapon != null && weapon.DesignerName != null)
             {
-                if (weapon.DesignerName.Equals(weaponName, StringComparison.OrdinalIgnoreCase))
+                var invName = NormalizeWeaponName(weapon.DesignerName);
+                var target = NormalizeWeaponName(weaponName);
+                if (string.Equals(invName, target, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }
@@ -480,7 +483,7 @@ public class PlaybackManager
         }
 
         // Give the weapon using controller's GiveNamedItem
-        controller.GiveNamedItem(weaponName);
+        controller.GiveNamedItem(NormalizeWeaponName(weaponName));
     }
 
     /// <summary>
@@ -499,6 +502,8 @@ public class PlaybackManager
             return;
         }
 
+        weaponName = NormalizeWeaponName(weaponName);
+
         // Try to find the weapon in the player's inventory
         var weapons = pawn.WeaponServices.MyWeapons;
         if (weapons == null)
@@ -512,7 +517,8 @@ public class PlaybackManager
             var weapon = weaponHandle?.Value;
             if (weapon != null && weapon.DesignerName != null)
             {
-                if (weapon.DesignerName.Equals(weaponName, StringComparison.OrdinalIgnoreCase))
+                var invName = NormalizeWeaponName(weapon.DesignerName);
+                if (string.Equals(invName, weaponName, StringComparison.OrdinalIgnoreCase))
                 {
                     targetWeapon = weapon;
                     break;
@@ -557,6 +563,23 @@ public class PlaybackManager
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Normalize weapon names to the canonical form with weapon_ prefix
+    /// </summary>
+    private static string NormalizeWeaponName(string weaponName)
+    {
+        if (string.IsNullOrWhiteSpace(weaponName))
+        {
+            return weaponName;
+        }
+        string name = weaponName.Trim();
+        if (!name.StartsWith("weapon_", StringComparison.OrdinalIgnoreCase))
+        {
+            name = $"weapon_{name}";
+        }
+        return name;
     }
     
     /// <summary>

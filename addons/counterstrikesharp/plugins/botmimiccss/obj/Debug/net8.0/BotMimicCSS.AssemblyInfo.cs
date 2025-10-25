@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BotMimicCSS")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0a6c37203f71dc30924fc3cdeeaceaf6e309800")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac1969c09c689dc75526e857037890a53698c6f3")]
 [assembly: System.Reflection.AssemblyProductAttribute("BotMimicCSS")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BotMimicCSS")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

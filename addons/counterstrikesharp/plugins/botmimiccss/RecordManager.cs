@@ -420,17 +420,36 @@ public class RecordManager
             {
                 if (activeWeapon.DesignerName != null && !string.IsNullOrEmpty(activeWeapon.DesignerName))
                 {
-                    frame.NewWeapon = activeWeapon.DesignerName;
+                    frame.NewWeapon = NormalizeWeaponName(activeWeapon.DesignerName);
                     session.PreviousWeapon = currentWeaponIndex;
                     
                     // Debug: log weapon changes
-                    Server.PrintToConsole($"[BotMimic] Recording weapon change for {player.PlayerName}: {activeWeapon.DesignerName} (tick {session.RecordedTicks})");
+                    Server.PrintToConsole($"[BotMimic] Recording weapon change for {player.PlayerName}: {frame.NewWeapon} (tick {session.RecordedTicks})");
                 }
             }
         }
 
         session.Frames.Add(frame);
         session.RecordedTicks++;
+    }
+
+    /// <summary>
+    /// Normalize weapon designer names to full class names (e.g., ensure weapon_ prefix)
+    /// </summary>
+    private static string NormalizeWeaponName(string weaponDesignerName)
+    {
+        if (string.IsNullOrWhiteSpace(weaponDesignerName))
+        {
+            return weaponDesignerName;
+        }
+
+        string name = weaponDesignerName.Trim();
+        // Some APIs may return names without the weapon_ prefix; ensure it exists
+        if (!name.StartsWith("weapon_", StringComparison.OrdinalIgnoreCase))
+        {
+            name = $"weapon_{name}";
+        }
+        return name;
     }
 
     /// <summary>
