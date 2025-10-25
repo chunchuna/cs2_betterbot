@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sSfcUnkfn5cox+1fi0Yux7DSLhzJ2jfNHJhdoj9mbexDKujge1up5ccJFUO4gELWAX+H3wNZVDrNsnW8n6bZBA==",
+  "dgSpecHash": "NNANUruYb8T9BxIIuObWcWDzsVJ6/vOZxS6A1LmBWtuh21LfDeduZhKay+HFxiLDoZD5LzNPHgClQ1bOIYpPvA==",
   "success": true,
-  "projectFilePath": "D:\\SteamLibrary\\steamapps\\common\\Counter-Strike Global Offensive\\game\\csgo\\addons\\counterstrikesharp\\plugins\\botmimiccss\\BotMimicCSS.csproj",
+  "projectFilePath": "D:\\临时开发路径\\cs2mod\\cs2betterbot\\cs2_betterbot\\addons\\counterstrikesharp\\plugins\\botmimiccss\\BotMimicCSS.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

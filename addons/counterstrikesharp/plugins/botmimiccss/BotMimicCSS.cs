@@ -49,14 +49,20 @@ public class BotMimicCSS : BasePlugin
         AddCommand("css_playrecord", "Play a record on a bot", CommandPlayRecord);
         AddCommand("css_stopmimic", "Stop a bot from mimicking", CommandStopMimic);
         AddCommand("css_deleterecord", "Delete a record", CommandDeleteRecord);
+        AddCommand("css_debugframe", "Debug frame info", CommandDebugFrame);
 
         // Register tick handler
         RegisterListener<Listeners.OnTick>(OnTick);
 
-        // Disable bot AI for better mimic playback
-        Server.ExecuteCommand("bot_stop 1");
-        Server.ExecuteCommand("bot_dont_shoot 1");
+        // Configure bot behavior for mimic playback
+        // NOTE: bot_stop would disable ALL input including our mimic commands
+        // So we use other cvars to limit AI behavior without stopping input processing
+        Server.ExecuteCommand("bot_stop 0");  // DO NOT stop bots - we need them to process input
+        Server.ExecuteCommand("bot_dont_shoot 0");  // Allow shooting (we'll control it via buttons)
         Server.ExecuteCommand("bot_freeze 0");
+        Server.ExecuteCommand("bot_controllable 1");  // Make bots controllable
+        Server.ExecuteCommand("bot_join_after_player 0");
+        Server.ExecuteCommand("bot_chatter off");  // Reduce bot chatter
 
         Server.PrintToConsole("[BotMimic] Plugin loaded successfully");
         Server.PrintToConsole("[BotMimic] Bot AI has been disabled for better playback");
@@ -89,14 +95,14 @@ public class BotMimicCSS : BasePlugin
         if (player == null || !player.IsValid)
             return HookResult.Continue;
 
-        // Disable AI for all bots to allow mimic control
+        // Configure bot behavior to allow mimic control
         if (player.IsBot)
         {
             Server.NextFrame(() =>
             {
-                // Ensure bot AI is disabled
-                Server.ExecuteCommand("bot_stop 1");
-                Server.ExecuteCommand("bot_dont_shoot 1");
+                // Ensure bot settings are correct (don't use bot_stop!)
+                Server.ExecuteCommand("bot_stop 0");
+                Server.ExecuteCommand("bot_dont_shoot 0");
             });
         }
 
@@ -178,12 +184,28 @@ public class BotMimicCSS : BasePlugin
             // Get current state
             var buttons = pawn.MovementServices?.Buttons?.ButtonStates[0] ?? 0UL;
             var velocity = pawn.AbsVelocity != null ? new Vector3(pawn.AbsVelocity.X, pawn.AbsVelocity.Y, pawn.AbsVelocity.Z) : new Vector3();
-            var angles = pawn.EyeAngles ?? new QAngle();
+            
+            // Get angles - EyeAngles should contain the player's view direction
+            QAngle angles;
+            if (pawn.EyeAngles != null)
+            {
+                angles = new QAngle(pawn.EyeAngles.X, pawn.EyeAngles.Y, pawn.EyeAngles.Z);
+            }
+            else
+            {
+                angles = new QAngle(0, 0, 0);
+            }
 
             // Recording
             if (_recordManager.IsPlayerRecording(player))
             {
                 _recordManager.RecordFrame(player, buttons, velocity, angles);
+                
+                // Debug: log occasionally to verify we're recording angles
+                if (_tickCounter % 200 == 0)
+                {
+                    Server.PrintToConsole($"[BotMimic] Recording {player.PlayerName}: Angles=({angles.X:F2},{angles.Y:F2},{angles.Z:F2}), Buttons={buttons}");
+                }
             }
 
             // Playback - this is where the magic happens for bots
@@ -218,17 +240,40 @@ public class BotMimicCSS : BasePlugin
         // Debug log every 100 ticks
         if (_tickCounter % 100 == 0)
         {
-            Server.PrintToConsole($"[BotMimic] ApplyFrame to {player.PlayerName}: Buttons={frame.Buttons}, Origin={frame.Origin}");
+            Server.PrintToConsole($"[BotMimic] ApplyFrame to {player.PlayerName}: Buttons={frame.Buttons}, Angles=({frame.PredictedAngles.X:F2},{frame.PredictedAngles.Y:F2},{frame.PredictedAngles.Z:F2}), Weapon={frame.NewWeapon}");
         }
         
-        // Set buttons - this makes the bot "press" the recorded buttons
+        // IMPORTANT: Set buttons - this makes the bot "press" the recorded buttons
+        // This needs to be done AFTER ProcessTick sets position/angles
         if (pawn.MovementServices?.Buttons != null)
         {
+            // Clear old button states first
+            pawn.MovementServices.Buttons.ButtonStates[0] = 0;
+            pawn.MovementServices.Buttons.ButtonStates[1] = 0;
+            pawn.MovementServices.Buttons.ButtonStates[2] = 0;
+            
+            // Then apply the recorded button state
             pawn.MovementServices.Buttons.ButtonStates[0] = frame.Buttons;
         }
 
-        // The position, velocity and angles are already set by PlaybackManager in ProcessTick
-        // This ensures the bot follows the exact recorded path
+        // Re-apply angles to ensure they stick (sometimes Teleport gets overridden)
+        if (pawn.EyeAngles != null)
+        {
+            pawn.EyeAngles.X = frame.PredictedAngles.X;
+            pawn.EyeAngles.Y = frame.PredictedAngles.Y;
+            pawn.EyeAngles.Z = frame.PredictedAngles.Z;
+        }
+        
+        // Also update the rotation for visual consistency
+        if (pawn.AbsRotation != null)
+        {
+            pawn.AbsRotation.X = frame.PredictedAngles.X;
+            pawn.AbsRotation.Y = frame.PredictedAngles.Y;
+            pawn.AbsRotation.Z = frame.PredictedAngles.Z;
+        }
+
+        // Position and velocity are already set by PlaybackManager in ProcessTick
+        // Weapon switching is also handled by PlaybackManager
     }
 
     [ConsoleCommand("css_mimic", "Opens the bot mimic menu")]
@@ -548,6 +593,59 @@ public class BotMimicCSS : BasePlugin
         {
             player.PrintToChat($" {ChatColors.Green}[BotMimic]{ChatColors.Default} Failed to delete record");
         }
+    }
+
+    [ConsoleCommand("css_debugframe", "Debug frame info")]
+    [RequiresPermissions("@css/admin")]
+    public void CommandDebugFrame(CCSPlayerController? player, CommandInfo command)
+    {
+        if (player == null || !player.IsValid)
+        {
+            command.ReplyToCommand("[BotMimic] This command can only be used by players");
+            return;
+        }
+
+        if (_playbackManager == null)
+        {
+            command.ReplyToCommand("[BotMimic] Playback manager not initialized");
+            return;
+        }
+
+        // Find a mimicking bot
+        foreach (var p in Utilities.GetPlayers())
+        {
+            if (p.IsBot && _playbackManager.IsPlayerMimicking(p))
+            {
+                var session = _playbackManager.GetPlaybackSession(p);
+                if (session != null && session.CurrentTick < session.Frames.Count)
+                {
+                    var frame = session.Frames[session.CurrentTick];
+                    player.PrintToChat($"Bot: {p.PlayerName}, Tick: {session.CurrentTick}/{session.RecordTickCount}");
+                    player.PrintToChat($"Buttons: {frame.Buttons}, Weapon: {frame.NewWeapon}");
+                    player.PrintToChat($"Angles: ({frame.PredictedAngles.X:F2}, {frame.PredictedAngles.Y:F2}, {frame.PredictedAngles.Z:F2})");
+                    player.PrintToChat($"Origin: ({frame.Origin.X:F2}, {frame.Origin.Y:F2}, {frame.Origin.Z:F2})");
+                    Server.PrintToConsole($"[BotMimic] Frame Debug - Bot: {p.PlayerName}");
+                    Server.PrintToConsole($"  Tick: {session.CurrentTick}/{session.RecordTickCount}");
+                    Server.PrintToConsole($"  Buttons: {frame.Buttons} (binary: {Convert.ToString((long)frame.Buttons, 2)})");
+                    Server.PrintToConsole($"  Weapon: {frame.NewWeapon}");
+                    Server.PrintToConsole($"  Angles: ({frame.PredictedAngles.X:F2}, {frame.PredictedAngles.Y:F2}, {frame.PredictedAngles.Z:F2})");
+                    
+                    // Check bot's current state
+                    if (p.PlayerPawn?.Value != null)
+                    {
+                        var pawn = p.PlayerPawn.Value;
+                        var currentButtons = pawn.MovementServices?.Buttons?.ButtonStates[0] ?? 0;
+                        var currentAngles = pawn.EyeAngles;
+                        Server.PrintToConsole($"  Bot Current Buttons: {currentButtons}");
+                        Server.PrintToConsole($"  Bot Current Angles: ({currentAngles?.X:F2}, {currentAngles?.Y:F2}, {currentAngles?.Z:F2})");
+                        Server.PrintToConsole($"  Bot Active Weapon: {pawn.WeaponServices?.ActiveWeapon?.Value?.DesignerName ?? "null"}");
+                    }
+                    return;
+                }
+            }
+        }
+
+        player.PrintToChat($" {ChatColors.Green}[BotMimic]{ChatColors.Default} No mimicking bot found");
     }
 
     private void LoadRecordsForCurrentMap()

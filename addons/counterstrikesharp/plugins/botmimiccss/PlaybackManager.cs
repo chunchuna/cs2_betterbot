@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Linq;
 using CounterStrikeSharp.API;
 using CounterStrikeSharp.API.Core;
 using CounterStrikeSharp.API.Modules.Utils;
@@ -183,15 +184,19 @@ public class PlaybackManager
         {
             // Set position and velocity for subsequent ticks
             session.ValidTeleportCall = true;
-            SetEntityOrigin(pawn, frame.Origin);
-            SetEntityVelocity(pawn, frame.ActualVelocity);
             
-            // Set angles
-            if (pawn.EyeAngles != null)
-            {
-                pawn.EyeAngles.X = frame.PredictedAngles.X;
-                pawn.EyeAngles.Y = frame.PredictedAngles.Y;
-            }
+            // Use Teleport to set position and angles together for proper synchronization
+            var cssPos = new CSSVector(frame.Origin.X, frame.Origin.Y, frame.Origin.Z);
+            var cssAng = new QAngle(frame.PredictedAngles.X, frame.PredictedAngles.Y, frame.PredictedAngles.Z);
+            
+            // Set origin first
+            SDKCallSetOrigin(pawn, frame.Origin);
+            
+            // Then teleport with angles (without changing position by passing NULL_VECTOR equivalent)
+            pawn.Teleport(cssPos, cssAng, pawn.AbsVelocity);
+            
+            // Set velocity after teleport
+            SetEntityVelocity(pawn, frame.ActualVelocity);
         }
 
         // Handle additional teleports
@@ -230,6 +235,11 @@ public class PlaybackManager
         // Handle weapon switching
         if (!string.IsNullOrEmpty(frame.NewWeapon))
         {
+            // Check if bot has the weapon, if not, give it to them
+            if (!HasWeapon(pawn, frame.NewWeapon))
+            {
+                GiveWeapon(pawn, frame.NewWeapon);
+            }
             SwitchToWeapon(pawn, frame.NewWeapon);
         }
 
@@ -376,6 +386,14 @@ public class PlaybackManager
             pawn.EyeAngles.Z = angles.Z;
         }
 
+        // Also set rotation for rendering
+        if (pawn.AbsRotation != null)
+        {
+            pawn.AbsRotation.X = angles.X;
+            pawn.AbsRotation.Y = angles.Y;
+            pawn.AbsRotation.Z = angles.Z;
+        }
+
         SetEntityVelocity(pawn, velocity);
         
         var cssPos = new CSSVector(position.X, position.Y, position.Z);
@@ -384,9 +402,9 @@ public class PlaybackManager
     }
 
     /// <summary>
-    /// Sets entity origin
+    /// Sets entity origin using SDK call style
     /// </summary>
-    private void SetEntityOrigin(CCSPlayerPawn pawn, Vector3 position)
+    private void SDKCallSetOrigin(CCSPlayerPawn pawn, Vector3 position)
     {
         if (pawn.AbsOrigin != null)
         {
@@ -394,7 +412,14 @@ public class PlaybackManager
             pawn.AbsOrigin.Y = position.Y;
             pawn.AbsOrigin.Z = position.Z;
         }
-
+    }
+    
+    /// <summary>
+    /// Sets entity origin
+    /// </summary>
+    private void SetEntityOrigin(CCSPlayerPawn pawn, Vector3 position)
+    {
+        SDKCallSetOrigin(pawn, position);
         var cssPos = new CSSVector(position.X, position.Y, position.Z);
         pawn.Teleport(cssPos, pawn.AbsRotation, pawn.AbsVelocity);
     }
@@ -413,11 +438,63 @@ public class PlaybackManager
     }
 
     /// <summary>
+    /// Checks if the pawn has a specific weapon
+    /// </summary>
+    private bool HasWeapon(CCSPlayerPawn pawn, string weaponName)
+    {
+        if (pawn.WeaponServices == null)
+        {
+            return false;
+        }
+
+        var weapons = pawn.WeaponServices.MyWeapons;
+        if (weapons == null)
+        {
+            return false;
+        }
+
+        foreach (var weaponHandle in weapons)
+        {
+            var weapon = weaponHandle?.Value;
+            if (weapon != null && weapon.DesignerName != null)
+            {
+                if (weapon.DesignerName.Equals(weaponName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Gives a weapon to the pawn
+    /// </summary>
+    private void GiveWeapon(CCSPlayerPawn pawn, string weaponName)
+    {
+        var controller = pawn.Controller?.Value as CCSPlayerController;
+        if (controller == null || !controller.IsValid || pawn.ItemServices == null)
+        {
+            return;
+        }
+
+        // Give the weapon using controller's GiveNamedItem
+        controller.GiveNamedItem(weaponName);
+    }
+
+    /// <summary>
     /// Switches the bot's weapon
     /// </summary>
     private void SwitchToWeapon(CCSPlayerPawn pawn, string weaponName)
     {
-        if (pawn.WeaponServices == null)
+        if (pawn.WeaponServices == null || string.IsNullOrEmpty(weaponName))
+        {
+            return;
+        }
+
+        var controller = pawn.Controller?.Value as CCSPlayerController;
+        if (controller == null || !controller.IsValid)
         {
             return;
         }
@@ -429,6 +506,7 @@ public class PlaybackManager
             return;
         }
 
+        CBasePlayerWeapon? targetWeapon = null;
         foreach (var weaponHandle in weapons)
         {
             var weapon = weaponHandle?.Value;
@@ -436,13 +514,98 @@ public class PlaybackManager
             {
                 if (weapon.DesignerName.Equals(weaponName, StringComparison.OrdinalIgnoreCase))
                 {
-                    // Found the weapon, switch to it
-                    // Note: ActiveWeapon is read-only in CS2, weapon switching needs to be done differently
-                    // For now, we'll just mark it - actual weapon switching may need native calls
-                    return;
+                    targetWeapon = weapon;
+                    break;
                 }
             }
         }
+
+        // If found the exact weapon, switch to it
+        if (targetWeapon != null && targetWeapon.IsValid)
+        {
+            // Switch to the weapon
+            pawn.WeaponServices.ActiveWeapon.Raw = (uint)targetWeapon.Handle;
+            Server.NextFrame(() =>
+            {
+                if (pawn.IsValid && targetWeapon.IsValid)
+                {
+                    pawn.WeaponServices.ActiveWeapon.Raw = (uint)targetWeapon.Handle;
+                }
+            });
+        }
+        else
+        {
+            // If don't have the weapon, try to switch to the same slot
+            int slot = GetWeaponSlot(weaponName);
+            if (slot >= 0)
+            {
+                var slotWeapon = pawn.WeaponServices.MyWeapons
+                    .Select(w => w?.Value)
+                    .Where(w => w != null && w.IsValid)
+                    .FirstOrDefault(w => w != null && GetWeaponSlotFromEntity(w) == slot);
+                
+                if (slotWeapon != null && slotWeapon.IsValid)
+                {
+                    pawn.WeaponServices.ActiveWeapon.Raw = (uint)slotWeapon.Handle;
+                    Server.NextFrame(() =>
+                    {
+                        if (pawn.IsValid && slotWeapon.IsValid)
+                        {
+                            pawn.WeaponServices.ActiveWeapon.Raw = (uint)slotWeapon.Handle;
+                        }
+                    });
+                }
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Gets the weapon slot from weapon name
+    /// </summary>
+    private int GetWeaponSlot(string weaponName)
+    {
+        string weaponClass = weaponName.ToLower();
+        
+        // Knife
+        if (weaponClass.Contains("knife") || weaponClass.Contains("bayonet"))
+        {
+            return 2;
+        }
+        // Pistol
+        else if (weaponClass.Contains("pistol") || weaponClass.Contains("deagle") || 
+                 weaponClass.Contains("elite") || weaponClass.Contains("fiveseven") ||
+                 weaponClass.Contains("glock") || weaponClass.Contains("hkp2000") ||
+                 weaponClass.Contains("p250") || weaponClass.Contains("tec9") ||
+                 weaponClass.Contains("cz75") || weaponClass.Contains("revolver") ||
+                 weaponClass.Contains("usp"))
+        {
+            return 1;
+        }
+        // Grenades/C4
+        else if (weaponClass.Contains("c4") || weaponClass.Contains("healthshot") ||
+                 weaponClass.Contains("decoy") || weaponClass.Contains("flashbang") ||
+                 weaponClass.Contains("hegrenade") || weaponClass.Contains("incgrenade") ||
+                 weaponClass.Contains("molotov") || weaponClass.Contains("smokegrenade") ||
+                 weaponClass.Contains("tagrenade"))
+        {
+            return 3;
+        }
+        // Primary weapons
+        else
+        {
+            return 0;
+        }
+    }
+    
+    /// <summary>
+    /// Gets the weapon slot from weapon entity
+    /// </summary>
+    private int GetWeaponSlotFromEntity(CBasePlayerWeapon weapon)
+    {
+        if (weapon.DesignerName == null)
+            return -1;
+            
+        return GetWeaponSlot(weapon.DesignerName);
     }
 
     /// <summary>

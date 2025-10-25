@@ -411,16 +411,19 @@ public class RecordManager
 
         // Check for weapon changes
         var activeWeapon = pawn.WeaponServices?.ActiveWeapon?.Value;
-        if (activeWeapon != null)
+        if (activeWeapon != null && activeWeapon.IsValid)
         {
             int currentWeaponIndex = (int)activeWeapon.Index;
 
             if (session.RecordedTicks == 0 || session.PreviousWeapon != currentWeaponIndex)
             {
-                if (activeWeapon.DesignerName != null)
+                if (activeWeapon.DesignerName != null && !string.IsNullOrEmpty(activeWeapon.DesignerName))
                 {
                     frame.NewWeapon = activeWeapon.DesignerName;
                     session.PreviousWeapon = currentWeaponIndex;
+                    
+                    // Debug: log weapon changes
+                    Server.PrintToConsole($"[BotMimic] Recording weapon change for {player.PlayerName}: {activeWeapon.DesignerName} (tick {session.RecordedTicks})");
                 }
             }
         }
